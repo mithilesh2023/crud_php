@@ -52,7 +52,12 @@ $result=mysqli_fetch_assoc($data)
     $data =  mysqli_query($conn,$query);
 
     if($data){
-      echo "Data Updated successfully";
+      echo "<script>
+      alert(' Data updated Successfully!');
+      </script>";
+      ?>
+      <meta http-equiv="refresh" content="0; url=http://localhost/crud/display.php"/>
+      <?php
     }else{
       echo "Data Updation Failed";
     }
