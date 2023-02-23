@@ -26,6 +26,19 @@
                   <label for="" class="form-label">Password</label>
                 <input type="password" name="password" class="form-control" required>
             </div>
+            <div class="mb-2 ">
+                  <label for="" class="form-label ">Caste</label>
+                <input type="radio" name="caste" value="General" required><label>General</label>
+                <input type="radio" name="caste" value="OBC" required><label>OBC</label>
+                <input type="radio" name="caste" value="SC" required><label>SC</label>
+                <input type="radio" name="caste" value="ST" required><label>ST</label>
+            </div>
+            <div class="mb-2 ">
+                <label for="" class="form-label " >Language</label>
+                <input type="checkbox" name="Language[]" value="Hindi"><label>Hindi</label>
+                <input type="checkbox" name="Language[]" value="English"><label>Engilsh</label>
+                <input type="checkbox" name="Language[]" value="Other"><label>Other</label>
+            </div>
             <div class="mb-1">
                   <button class="btn btn-success w-100" name="submit" type="submit">Submit</button>
             </div>
@@ -40,8 +53,13 @@
     $name      = $_POST['name'];
     $email     = $_POST['email'];
     $password  = $_POST['password'];
+    $caste  = $_POST['caste'];
 
-    $query = "INSERT INTO form (name,email,password) VALUES('$name','$email','$password')";
+    $lang  = $_POST['Language'];
+    $lang1=implode(",",$lang);
+    // echo $lang1;
+
+    $query = "INSERT INTO form (name,email,password,caste,language) VALUES('$name','$email','$password','$caste','$lang1')";
     $data =  mysqli_query($conn,$query);
 
     if($data){
