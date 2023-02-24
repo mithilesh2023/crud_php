@@ -12,7 +12,7 @@
 <body>
     <div class="container border border-black col-5 p-3 mt-3">
         <h1 class="text-primary">Form Application</h1>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
           <div class="row">
             <div class="mb-2 ">
                   <label for="" class="form-label">Name</label>
@@ -34,6 +34,10 @@
                 <input type="radio" name="caste" value="ST" required><label>ST</label>
             </div>
             <div class="mb-2 ">
+                  <label for="" class="form-label">Image</label>
+                  <input type="file" name="uploadfile"  required>
+            </div>
+            <div class="mb-2 ">
                 <label for="" class="form-label " >Language</label>
                 <input type="checkbox" name="Language[]" value="Hindi"><label>Hindi</label>
                 <input type="checkbox" name="Language[]" value="English"><label>Engilsh</label>
@@ -50,6 +54,12 @@
 
 <?php
   if(isset($_POST['submit'])){
+    //--------------img work start-------------------- 
+    $filename=$_FILES["uploadfile"]["name"];
+    $tempname=$_FILES["uploadfile"]["tmp_name"];
+    $folder="images/".$filename;
+    move_uploaded_file($tempname,$folder);
+    //--------------img work end-------------------- 
     $name      = $_POST['name'];
     $email     = $_POST['email'];
     $password  = $_POST['password'];
@@ -59,13 +69,16 @@
     $lang1=implode(",",$lang);
     // echo $lang1;
 
-    $query = "INSERT INTO form (name,email,password,caste,language) VALUES('$name','$email','$password','$caste','$lang1')";
+    $query = "INSERT INTO form (std_image,name,email,password,caste,language)
+     VALUES('$folder','$name','$email','$password','$caste','$lang1')";
     $data =  mysqli_query($conn,$query);
 
     if($data){
-      echo "Data Inserted successfully";
+
+      echo " <script>alert('Form Submitted Successfully!') </script>   ";
     }else{
-      echo "Data Insert Failed";
+   
+      echo " <script>alert('Form Failed !') </script>   ";
     }
 }
 ?>

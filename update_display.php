@@ -91,7 +91,8 @@ $language1=explode(",",$language);
                 ><label>Other</label>
             </div>
             <div class="mb-1">
-                  <button class="btn btn-success w-100" name="update" type="submit">Submit</button>
+                  <button class="btn btn-success w-100" name="update" type="submit">
+                    Submit</button>
             </div>
             </div>
         </form>
